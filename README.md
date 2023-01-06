@@ -1,0 +1,2 @@
+# ShortUrl API
+Con esta app, el usuario puede registrarse, crear una sesión, editar su perfil y agregar las urls que desee. La app le dará una url corta para poderla compartirla en sus redes sociales, amigos o conocidos
