@@ -1,7 +1,8 @@
 import express from 'express'
 import { body } from "express-validator";
-import { login, signup } from '../controllers/auth.controller.js';
+import { login, signup, infoUser, refreshToken, logout } from '../controllers/auth.controller.js';
 import { validationResExpress } from '../middlewares/validationResExpress.js';
+import { validateToken } from '../middlewares/validateToken.js';
 const router = express.Router()
 
 router.post('/signup', [
@@ -19,7 +20,12 @@ router.post('/signup', [
 
 router.post("/login", [
     body('email', "formato de email inválido").trim().isEmail().normalizeEmail(),
-    body('password', "Mínino 8 caracteres").trim().isLength({min: 8}),
 ], validationResExpress, login);
+
+router.get("/protected", validateToken, infoUser)
+
+router.get("/refresh", refreshToken)
+
+router.get("/logout", logout)
 
 export default router;
