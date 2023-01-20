@@ -1,7 +1,5 @@
 import { User } from "../models/Users.js";
-import { generateToken, generateRefreshToken } from "../utils/tokenManager.js";
-import { errorsToken } from "../helpers/errorsToken.js"
-import jwt from 'jsonwebtoken'
+import { generateToken, generateRefreshToken, errorsToken } from "../utils/tokenManager.js";
 
 export const signup = async (req, res) => {
     
@@ -9,8 +7,7 @@ export const signup = async (req, res) => {
         const { email , password } = req.body
 
         let user = await User.findOne({ email })
-        if (user) return res.json({ status: 401, code: 11000, message: "El usuario ya existe" })
-        // if (user) throw new Error("Email ya registrado 😒");
+        if (user) return res.json({ status: 401, code: 11000, message: "El usuario ya existe 😒" })
 
         user = new User({ email, password })
         await user.save()
@@ -61,18 +58,12 @@ export const infoUser = async(req, res) => {
 
 export const refreshToken = (req, res) => {
     try {
-        let refreshTokenCookie = req.cookies?.refreshToken
-        if(!refreshTokenCookie) throw new Error("No existe el refreshToken")
-
-        const { uid } = jwt.verify(refreshTokenCookie, process.env.JWT_REFRESH)
-
-        const { token, expiresIn } = generateToken(uid)
+        const { token, expiresIn } = generateToken(req.uid)
 
         return res.json({ token, expiresIn })
     } catch (e) {
         console.log(e);
-        const data = errorsToken(e)
-        return res.status(401).json({status: 401, error: data})
+        return res.status(401).json({status: 401, message: errorsToken(e) })
     }
 }
 

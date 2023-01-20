@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 export const generateToken = (uid) => {
-    const expiresIn = 1000 * 60 * 15;
+    const expiresIn = 60 * 15;
     try {
         const token = jwt.sign({ uid }, process.env.JWT_SECRET, { expiresIn });
         return { token, expiresIn };
@@ -13,11 +13,31 @@ export const generateToken = (uid) => {
 
 export const generateRefreshToken = (uid, res) => {
     const expiresIn = 1000 * 60 * 60 * 24 * 30;
-    const refreshToken = jwt.sign({ uid }, process.env.JWT_REFRESH, { expiresIn });
-
-    res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: !(process.env.MODO === "developer"),
-        expires: new Date(Date.now() + expiresIn),
-    })
+    try {
+        const refreshToken = jwt.sign({ uid }, process.env.JWT_REFRESH, { expiresIn });
+    
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: !(process.env.MODO === "developer"),
+            expires: new Date(Date.now() + expiresIn),
+        })
+    } catch (e) {
+        console.log(e);
+    }
 };
+
+export const errorsToken = (message) => {
+    switch (message) {
+        case "jwt malformed" :
+            return "Formato no válido"
+            break;
+        case "invalid token" :
+        case "jwt expired" :
+        case "invalid signature" :
+        case "jwt signature is required" :
+            return "Token no válido"
+            break;
+        default:
+            return message
+    }
+}

@@ -8,38 +8,40 @@
 </head>
 <body>
     <form id="formLogin">
-        <input type="email" value="test@test.com" id="email" />
+        <input type="email" value="test1@test.com" id="email" />
         <input type="password" value="12341234" id="password" />
         <button type="submit">Acceder</button>
     </form>
 
     <script>
-        const form      = document.querySelector('#formLogin')
-        const email     = document.querySelector('#email')
-        const password  = document.querySelector('#password')
+        const formLogin = document.querySelector("#formLogin");
+        const email = document.querySelector("#email");
+        const password = document.querySelector("#password");
 
-        form.addEventListener('submit', async (i) => {
-            i.preventDefault()
+        
+        formLogin.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
             try {
-                const res = await fetch('/api/v1/auth/login', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json" },
+                const res = await fetch("http://localhost:7000/api/v1/auth/login", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                     body: JSON.stringify({
                         email: email.value,
-                        password: password.value
-                    })
-                })
+                        password: password.value,
+                    }),
+                });
 
-                console.log(res.ok, res.status)
-                const data = await res.json()
-                console.log(data);
-                // const { token } = await res.json()
-                window.location.href = '/protected.html'
+                console.log(res.ok, res.status);
+                const { token } = await res.json();
 
-            } catch (e) {
-                console.log(e);
+                // window.location.href = "/protected.html";
+            } catch (error) {
+                console.log(error);
             }
-        })
+        });
     </script>
 </body>
 </html>
