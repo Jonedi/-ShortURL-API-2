@@ -1,7 +1,7 @@
 import { Url } from "../models/Links.js";
 
 export const redirectNanoLink = async (req, res) => {
-    console.log('entro');
+    
     try {
         const { nanoLink } = req.params
         
