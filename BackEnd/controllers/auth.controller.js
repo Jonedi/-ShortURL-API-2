@@ -7,7 +7,7 @@ export const signup = async (req, res) => {
         const { email , password } = req.body
 
         let user = await User.findOne({ email })
-        if (user) return res.json({ status: 401, code: 11000, message: "El usuario ya existe 😒" })
+        if (user) return res.status(401).json({ status: 401, code: 11000, message: "El usuario ya existe 😒" })
 
         user = new User({ email, password })
         await user.save()
@@ -16,7 +16,7 @@ export const signup = async (req, res) => {
         const { token, expiresIn } = generateToken(user.id)
         generateRefreshToken(user.id, res)
         
-        return res.json({ token, expiresIn })
+        return res.status(200).json({ token, expiresIn })
         // return res.json({ status: 'signup Ok' })
     } catch (e) {
         console.log(e.code);
@@ -29,15 +29,15 @@ export const login = async (req, res) => {
         const { email, password } = req.body
         
         let user = await User.findOne({ email })
-        if (!user) return res.json({ status: 403, message: "El usuario no existe" })
+        if (!user) return res.status(403).json({ status: 403, message: "El usuario no existe 😒" })
         // if(!user || !(await user.comparePassword(password))) return throw new Error("Email or password is incorrect")
-        if(!user || !(await user.comparePassword(password))) return res.json({ status: 403, message: "Email o contraseña es incorrecto" })
+        if(!user || !(await user.comparePassword(password))) return res.status(403).json({ status: 403, message: "Email o contraseña incorrecto 😒" })
 
         // Token
         const { token, expiresIn } = generateToken(user.id)
         generateRefreshToken(user.id, res)
         
-        return res.json({ token, expiresIn })
+        return res.status(200).json({ token, expiresIn })
         // return res.json({ status: "login OK" })
     } catch (e) {
         console.log(e);
@@ -70,5 +70,5 @@ export const refreshToken = (req, res) => {
 export const logout = (req, res) => {
     // https://stackoverflow.com/questions/27978868/destroy-cookie-nodejs
     res.clearCookie("refreshToken");
-    return res.json({ ok: true });
+    return res.status(200).json({ ok: true });
 };

@@ -58,7 +58,7 @@ export const linkValidator = [
         return value;
 
       } catch (error) {
-          throw new Error("Link 404 not found");
+          throw new Error("Link no encontrado");
       }
     }),
   validationResExpress
@@ -73,7 +73,7 @@ export const paramsLinkValidator = [
 ]
 
 export const paramNanolinkValidator = [
-  param("nanoLink", "Fromato no válido(ExpressValidator)")
+  param("nanoLink", "Fromato no válido")
     .trim()
     .notEmpty()
     .escape(),

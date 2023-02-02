@@ -18,7 +18,17 @@ export const validateToken = (req, res, next) => {
 }
 export const validateRefreshToken = (req, res, next) => {
     try {
+        console.log(req.cookies?.refreshToken);
         let refreshTokenCookie = req.cookies?.refreshToken
+        /* if (refreshTokenCookie) {
+            console.log("si hay refreshToken");
+            res.cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+                secure: !(process.env.MODO === "developer"),
+                expires: new Date(Date.now() + expiresIn),
+                sameSite: 'none'
+            })
+        } */
         if(!refreshTokenCookie) throw new Error("No existe el refreshToken")
 
         const { uid } = jwt.verify(refreshTokenCookie, process.env.JWT_REFRESH)

@@ -2,10 +2,11 @@ import  "dotenv/config"
 import "./database/connectDB.js"
 import express from "express"
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import session from "express-session"
 import authRoutes from "./routes/auth.route.js"
 import linkRoutes from "./routes/link.route.js"
 import redirectRoutes from "./routes/redirect.route.js"
-import cors from 'cors'
 
 const app = express()
 const whiteList = [process.env.ORIGIN1]
@@ -16,6 +17,18 @@ app.use(cors({
         return callback( `No autorizado por CORS. origin: ${origin}. No autorizado` )
     },
     credentials: true
+}))
+app.use(session({
+    secret: process.env.JWT_REFRESH,
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+        expires: new Date(Date.now() + 1000 * 60 * 60),
+        httpOnly: true,
+        secure: (process.env.MODO === "developer"),
+        sameSite: 'none',
+    }
+
 }))
 app.use(express.json())
 app.use(cookieParser())

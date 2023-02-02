@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header elevated v-if="userStore.token">
       <q-toolbar>
         <q-btn
           flat
@@ -15,7 +15,10 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn color="dark" class="q-mr-sm" to="/">Inicio</q-btn>
+        <q-btn color="orange" class="q-mr-sm" to="/protected">Protected</q-btn>
+        <q-btn color="purple" class="q-mr-sm" to="/about">About</q-btn>
+        <q-btn color="red" class="q-mr-sm" @click="logOut">LogOut</q-btn>
       </q-toolbar>
     </q-header>
 
@@ -45,11 +48,31 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useUserStore } from "../stores/user-store";
+import { useRouter } from 'vue-router';
 
-const linksList = [
+const userStore = useUserStore()
+const router = useRouter()
+
+const logIn = async () => {
+  await userStore.access()
+  router.push('/')
+}
+
+const logOut = async () => {
+  await userStore.logout()
+  router.push('/login')
+}
+
+const leftDrawerOpen = ref(false)
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+const essentialLinks = [
   {
     title: 'Docs',
     caption: 'quasar.dev',
@@ -92,25 +115,5 @@ const linksList = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
   }
-]
-
-export default defineComponent({
-  name: 'MainLayout',
-
-  components: {
-    EssentialLink
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
+];
 </script>
