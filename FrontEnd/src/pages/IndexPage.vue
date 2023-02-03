@@ -5,7 +5,7 @@
       v-for="link in linkStore.links"
       :key="link._id"
     >
-      <card-link class="q-mt-sm" />
+      <card-link :link="link" class="q-my-md" />
     </template>
     <!-- <pre>{{ linkStore.links }}</pre> -->
   </q-page>

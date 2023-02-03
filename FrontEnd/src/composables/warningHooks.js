@@ -15,19 +15,23 @@ export const useAlert = () => {
 export const useNotify = () => {
     const $q = useQuasar()
 
-    const showNotify = (
-        message = "Error de servidor",
-        color = 'negative',
-        icon = 'report_problem',
-        position = 'bottom'
-    ) => {
+    const successNotify = ( message = "Éxito" ) => {
         $q.notify({
             message,
-            color,
-            icon: icon || null,
-            position
+            color: 'green',
+            icon: '',
+            position: 'top'
         })
     }
 
-    return { showNotify }
+    const errorNotify = ( message = "Error de servidor" ) => {
+        $q.notify({
+            message,
+            color: 'negative',
+            icon: 'report_problem',
+            position: 'center'
+        })
+    }
+
+    return { successNotify, errorNotify }
 }

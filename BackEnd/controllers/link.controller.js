@@ -71,7 +71,7 @@ export const updateLink = async(req, res) => {
     }
 }
 
-export const getNanoLink = async(req, res) => {
+/* export const getNanoLink = async(req, res) => {
     try {
         const { id } = req.params
         const link = await Url.findById(id)
@@ -84,5 +84,22 @@ export const getNanoLink = async(req, res) => {
         console.log(e);
         if(e.kind === "ObjectId") return res.status(403).json({ status: 403, error: "Formato id incorrecto", message: e.message})
         return res.status(500).json({ status: 500, error: "error de servidor", message: e.message })
+    }
+} */
+
+export const getLink = async(req, res) => {
+    try {
+        const { nanoLink } = req.params
+        const links = await Url.findOne({nanoLink})
+
+        if(!links) return res.status(400).json({error: 'No existe la url'})
+
+        return res.json({longLink: links.longLink})
+    } catch (e) {
+        console.log(e);
+        if (error.kind === 'ObjectId') {
+            return res.status(403).json({error: 'Formato id Incorrecto'})
+        }
+        return res.status(403).json({error: 'error de servidor'})
     }
 }

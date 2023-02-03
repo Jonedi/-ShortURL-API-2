@@ -12,12 +12,14 @@
                             val => val && val.length > 0 || 'Por favor ingrese un email válido',
                             val => /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) || 'Formato de email incorrecto'
                         ]"
+                        lazy-rules
                     ></q-input>
                     <q-input
                         v-model="password"
                         type="password"
                         label="Ingrese contraseña"
                         :rules="[ val => val && val.length > 5  || 'Ingrese una contraseña mayor a 6 caracteres']"
+                        lazy-rules
                     ></q-input>
                     <q-input
                         v-model="repassword"
@@ -61,6 +63,7 @@ const handleSubmit = async () => {
         await userStore.register(email.value, password.value, repassword.value)
         email.value = ''
         password.value = ''
+        form.value.resetValidation()
         router.push('/')
     } catch (e) {
         // console.log(e.message);
