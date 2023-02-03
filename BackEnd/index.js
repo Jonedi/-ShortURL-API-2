@@ -3,7 +3,6 @@ import "./database/connectDB.js"
 import express from "express"
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import session from "express-session"
 import authRoutes from "./routes/auth.route.js"
 import linkRoutes from "./routes/link.route.js"
 import redirectRoutes from "./routes/redirect.route.js"
