@@ -17,18 +17,6 @@ app.use(cors({
     },
     credentials: true
 }))
-app.use(session({
-    secret: process.env.JWT_REFRESH,
-    saveUninitialized: true,
-    resave: true,
-    cookie: {
-        expires: new Date(Date.now() + 1000 * 60 * 60),
-        httpOnly: true,
-        secure: (process.env.MODO === "developer"),
-        sameSite: 'none',
-    }
-
-}))
 app.use(express.json())
 app.use(cookieParser())
 app.use("/api/v1/auth", authRoutes);
