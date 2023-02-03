@@ -68,7 +68,7 @@ const handleSubmit = async () => {
             });
             
         } else {
-            notify.showAlert()
+            alert.showAlert()
         }
     }
 }

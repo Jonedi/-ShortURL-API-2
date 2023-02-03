@@ -34,7 +34,6 @@ export const useLinkStore = defineStore('link', () => {
                 method: "GET",
                 headers: { Authorization: `Bearer ${userStore.token}` }
             })
-            console.log(res.data);
             links.value = [...res.data.links]
 
         } catch (e) {
