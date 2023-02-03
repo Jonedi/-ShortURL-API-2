@@ -16,8 +16,8 @@
         </q-toolbar-title>
 
         <q-btn color="dark" class="q-mr-sm" to="/">Inicio</q-btn>
-        <q-btn color="orange" class="q-mr-sm" to="/protected">Protected</q-btn>
-        <q-btn color="purple" class="q-mr-sm" to="/about">About</q-btn>
+        <!-- <q-btn color="orange" class="q-mr-sm" to="/protected">Protected</q-btn>
+        <q-btn color="purple" class="q-mr-sm" to="/about">About</q-btn> -->
         <q-btn color="red" class="q-mr-sm" @click="logOut">LogOut</q-btn>
       </q-toolbar>
     </q-header>
@@ -74,46 +74,46 @@ const toggleLeftDrawer = () => {
 
 const essentialLinks = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'JonTmarz',
+    caption: 'jontmarz',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: 'https://jontmarz.netlify.app'
   },
   {
     title: 'Github',
-    caption: 'github.com/quasarframework',
+    caption: 'github.com/jonedi',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: 'https://github.com/Jonedi'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'WhatsApp',
+    caption: 'chat.whatsapp',
     icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    link: 'https://api.whatsapp.com/send/?phone=573194356458&text&type=phone_number&app_absent=0'
   },
-  {
+  /* {
     title: 'Forum',
     caption: 'forum.quasar.dev',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
-  },
+  }, */
   {
     title: 'Twitter',
-    caption: '@quasarframework',
+    caption: '@JonTMarz',
     icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    link: 'https://twitter.com/JonTMarz'
   },
   {
     title: 'Facebook',
-    caption: '@QuasarFramework',
+    caption: '@Ing.Johntorres',
     icon: 'public',
-    link: 'https://facebook.quasar.dev'
+    link: 'https://www.facebook.com/Ing.Johntorres'
   },
-  {
+  /* {
     title: 'Quasar Awesome',
     caption: 'Community Quasar projects',
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
-  }
+  } */
 ];
 </script>
