@@ -47,7 +47,6 @@ export const useUserStore = defineStore("user", () => {
             expiresIn.value = res.data.expiresIn;
             localStorage.setItem('user', '🔥🔥')
             setTime();
-            console.log("refreshToken");
         } catch (e) {
             console.log(e);
             localStorage.removeItem('user')

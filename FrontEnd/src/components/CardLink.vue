@@ -89,7 +89,6 @@ const editLink = (link) => {
 
 const copiarUrl = async(nanoLink) => {
     try {
-        console.log(process.env.FRONT_URI);
         const path = `${process.env.FRONT_URI}/${nanoLink}`
         await navigator.clipboard.writeText(path);
         successNotify('Se ha copido el shortURL')
