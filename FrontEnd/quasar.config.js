@@ -70,8 +70,8 @@ module.exports = configure(function (ctx) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        FRONT_URI:    ctx.dev ? 'http://192.168.1.2:9000/'      : 'https://frontend-shorturl.onrender.com',
-        MY_API_REST:  ctx.dev ? 'http://localhost:7000/api/v1'  : 'https://backend-shorturl.onrender.com'
+        FRONT_URI:    ctx.dev ? 'http://192.168.1.2:9000/'      : 'jetsys.netlify.app',
+        MY_API_REST:  ctx.dev ? 'http://localhost:7000/api/v1'  : 'https://backend-shorturl.onrender.com/api/v1'
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

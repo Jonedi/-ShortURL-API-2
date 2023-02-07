@@ -12,23 +12,20 @@ export const validateToken = (req, res, next) => {
         next()
     } catch (e) {
         console.log(e);
-        // return res.status(401).json({status: 405, error: e.message})
         return res.status(401).json({status: 405, message: e.message, error: errorsToken(e.message)})
     }
 }
 export const validateRefreshToken = (req, res, next) => {
     try {
-        console.log(req.cookies?.refreshToken);
         let refreshTokenCookie = req.cookies?.refreshToken
-        /* if (refreshTokenCookie) {
-            console.log("si hay refreshToken");
+        if (refreshTokenCookie) {
             res.cookie("refreshToken", refreshToken, {
                 httpOnly: true,
                 secure: !(process.env.MODO === "developer"),
                 expires: new Date(Date.now() + expiresIn),
                 sameSite: 'none'
             })
-        } */
+        }
         if(!refreshTokenCookie) throw new Error("No existe el refreshToken")
 
         const { uid } = jwt.verify(refreshTokenCookie, process.env.JWT_REFRESH)
@@ -37,7 +34,6 @@ export const validateRefreshToken = (req, res, next) => {
         next()
     } catch (e) {
         console.log(e);
-        // return res.status(401).json({status: 401, error: e.message })
         return res.status(401).json({status: 401, error: errorsToken(e.message)})
     }
 }

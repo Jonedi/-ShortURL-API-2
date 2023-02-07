@@ -16,8 +16,8 @@
         </q-toolbar-title>
 
         <q-btn color="dark" class="q-mr-sm" to="/">Inicio</q-btn>
-        <!-- <q-btn color="orange" class="q-mr-sm" to="/protected">Protected</q-btn>
-        <q-btn color="purple" class="q-mr-sm" to="/about">About</q-btn> -->
+        <q-btn color="orange" class="q-mr-sm" to="/protected">Protected</q-btn>
+        <q-btn color="purple" class="q-mr-sm" to="/about">About</q-btn>
         <q-btn color="red" class="q-mr-sm" @click="logOut">LogOut</q-btn>
       </q-toolbar>
     </q-header>
