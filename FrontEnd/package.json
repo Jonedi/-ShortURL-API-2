@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "productName": "JetCode App",
   "author": "Jon Tmarz <34428004+Jonedi@users.noreply.github.com>",
   "private": true,
   "scripts": {

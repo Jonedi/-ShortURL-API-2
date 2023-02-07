@@ -2,6 +2,9 @@
     <div>
         <q-page class="row justify-center">
             <div class="col-12 col-sm-6 col-md-5">
+                <div class="row justify-center">
+                    <img class="logo-style q-mt-lg" src="../assets/logo-jetcode.png" alt="logo jetcode" />
+                </div>
                 <h3 class="text-center">Login</h3>
                 <q-form @submit.prevent="handleSubmit" ref="form">
                     <q-input
@@ -71,7 +74,7 @@ const handleSubmit = async () => {
             alert.showAlert()
         }
     }
-}
+};
 
 /* const alertError = (message = "Error de servidor") => {
     $q.dialog({
@@ -80,3 +83,10 @@ const handleSubmit = async () => {
     })
 }; */
 </script>
+
+<style lang="scss">
+.logo-style {
+    width: 25%;
+    height: auto;
+}
+</style>
